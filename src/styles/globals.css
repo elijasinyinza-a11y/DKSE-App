@@ -82,6 +82,7 @@ select {
 .app-main {
   flex: 1;
   padding-bottom: 80px;          /* clear the bottom nav */
+  padding-top: 48px;             /* clear the top bar */
 }
 
 /* ----------------------------------------------------------
