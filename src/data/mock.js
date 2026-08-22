@@ -55,10 +55,13 @@ export const mockProgress = {
 }
 
 /* The daily key surfaced on the home screen */
+/* The daily wisdom surfaced on the home screen.
+   At full scale: AI selects a quote from a per-book repository based on
+   what the reader is currently reading, and shows its source book.
+   For the scaffold this is a static sample. */
 export const mockDailyKey = {
   bookSlug: 'money-at-the-gate',
   bookTitle: 'Money at the Gate',
-  chapterNumber: 3,
   chapterTitle: 'The Gate of Wealth',
   excerpt:
     'The gate is the place of commerce, influence and authority. God wants His people at the gate — not begging at the gate, but positioned at the gate.',
