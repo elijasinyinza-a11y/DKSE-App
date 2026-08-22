@@ -221,3 +221,67 @@
   color: var(--color-muted);
   margin-top: var(--space-5);
 }
+
+/* ── INVITE ───────────────────────────── */
+.inviteCard {
+  background: linear-gradient(160deg, var(--color-amber-light), #fff);
+  border: var(--border-thin) solid var(--color-amber-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+}
+
+.inviteTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.inviteIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-amber);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.inviteTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  margin-bottom: var(--space-1);
+}
+
+.inviteDesc {
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+  line-height: var(--leading-normal);
+}
+
+/* ── TOAST ────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: calc(68px + var(--space-4));
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-ink);
+  color: #ffffff;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  z-index: var(--z-modal);
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.25);
+  animation: fadeInUp 0.2s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

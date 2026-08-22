@@ -1,17 +1,41 @@
+import { useState } from 'react'
 import Link from 'next/link'
 import { books } from '../data/content'
 import { mockUser, mockDailyKey, mockProgress, getProgress } from '../data/mock'
 import styles from './home.module.css'
 
 export default function Home() {
+  const [toast, setToast] = useState('')
+
   const continueReading = books
     .filter((b) => mockProgress[b.slug] && mockProgress[b.slug].status === 'in-progress')
     .map((b) => ({ ...b, progress: getProgress(b.slug) }))
 
   const greeting = getGreeting()
 
+  function handleShare(type) {
+    const wisdomText = `"${mockDailyKey.excerpt}"\n\n— from ${mockDailyKey.bookTitle}, Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
+    const declarationText = `Today I declare:\n\n"${mockDailyKey.declaration}"\n\n— Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
+    const text = type === 'wisdom' ? wisdomText : declarationText
+
+    if (navigator.share) {
+      // Native share sheet — works on mobile (WhatsApp, Facebook, SMS, etc.)
+      navigator.share({ text }).catch(() => {})
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(text).then(() => {
+        setToast('Copied to clipboard')
+        setTimeout(() => setToast(''), 2500)
+      }).catch(() => {
+        setToast('Unable to copy')
+        setTimeout(() => setToast(''), 2500)
+      })
+    }
+  }
+
   return (
     <div className={styles.home}>
+      {toast && <div className={styles.toast}>{toast}</div>}
 
       <header className={styles.header}>
         <div>
@@ -41,7 +65,10 @@ export default function Home() {
         <div className={styles.declaration}>
           <p className={styles.declLabel}>Declare this today</p>
           <p className={styles.declText}>{mockDailyKey.declaration}</p>
-          <button className={styles.declShare}><ShareIcon /> Share declaration</button>
+          <div className={styles.shareRow}>
+            <button className={styles.declShare} onClick={() => handleShare('wisdom')}><ShareIcon /> Share today&apos;s wisdom</button>
+            <button className={styles.declShare} onClick={() => handleShare('declaration')}><ShareIcon /> Share declaration</button>
+          </div>
         </div>
       </section>
 

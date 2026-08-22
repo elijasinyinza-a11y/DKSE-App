@@ -6,12 +6,30 @@ export default function Profile() {
   const [dailyReminder, setDailyReminder] = useState(true)
   const [newEpisodes, setNewEpisodes] = useState(true)
   const [newBooks, setNewBooks] = useState(false)
+  const [toast, setToast] = useState('')
 
   const initials = mockUser.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
   const joined = new Date(mockUser.joinedDate).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
 
+  function handleInvite() {
+    // Placeholder invite link — replace with real per-user invite URL post-launch.
+    const inviteText = `I've been reading Divine Keys for Spiritual Exploits — a powerful curriculum for kingdom living. Join me on the journey.\n\nhttps://divinekeys.com`
+    if (navigator.share) {
+      navigator.share({ text: inviteText }).catch(() => {})
+    } else {
+      navigator.clipboard.writeText(inviteText).then(() => {
+        setToast('Invite link copied')
+        setTimeout(() => setToast(''), 2500)
+      }).catch(() => {
+        setToast('Unable to copy')
+        setTimeout(() => setToast(''), 2500)
+      })
+    }
+  }
+
   return (
     <div className={styles.profile}>
+      {toast && <div className={styles.toast}>{toast}</div>}
       <header className={styles.header}>
         <p className="eyebrow">Account</p>
         <h1 className={styles.pageTitle}>Profile</h1>
@@ -72,6 +90,29 @@ export default function Profile() {
           <LinkRow label="Contact us" value="" />
           <LinkRow label="Privacy policy" value="" />
           <LinkRow label="Terms of use" value="" />
+        </div>
+      </section>
+
+      {/* ── INVITE ─────────────────────────────── */}
+      <section className={styles.section}>
+        <p className="section-label">Spread the word</p>
+        <div className={styles.inviteCard}>
+          <div className={styles.inviteTop}>
+            <div className={styles.inviteIcon}>
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden="true">
+                <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M3 20c0-3.5 2.7-6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M17 13v6M14 16h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div>
+              <p className={styles.inviteTitle}>Invite a friend</p>
+              <p className={styles.inviteDesc}>Know someone who would benefit from the Divine Keys? Share the journey.</p>
+            </div>
+          </div>
+          <button className={`btn btn--primary btn--block`} onClick={handleInvite}>
+            Share Divine Keys
+          </button>
         </div>
       </section>
 
