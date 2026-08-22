@@ -75,7 +75,7 @@ export default function Home() {
         <Link href="/library" className={styles.libraryLink}>
           <div>
             <p className={styles.libraryLinkTitle}>Explore the full library</p>
-            <p className={styles.libraryLinkSub}>9 volumes \u00b7 6 additional resources</p>
+            <p className={styles.libraryLinkSub}>The Divine Keys series and more</p>
           </div>
           <ArrowIcon />
         </Link>
