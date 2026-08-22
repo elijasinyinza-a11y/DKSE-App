@@ -250,7 +250,7 @@
 }
 
 .readProse p {
-  font-size: var(--text-md);
+  font-size: 18px;
   color: var(--color-ink);
   line-height: 1.85;
   margin-bottom: var(--space-5);
