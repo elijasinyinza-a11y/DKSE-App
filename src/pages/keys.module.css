@@ -357,3 +357,26 @@
   border: var(--border-thin) dashed var(--color-border-strong);
   border-radius: var(--radius-lg);
 }
+
+.emptyJourney {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--color-card-alt);
+  border: var(--border-thin) dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.emptyTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.emptyText {
+  font-size: var(--text-base);
+  color: var(--color-sub);
+  line-height: var(--leading-relaxed);
+  max-width: 300px;
+  margin: 0 auto var(--space-5);
+}

@@ -1,11 +1,9 @@
 import Link from 'next/link'
 import { books } from '../data/content'
-import { mockUser, mockProgress, mockBookmarks, getProgress, rewardTiers, getRewardProgress } from '../data/mock'
+import { mockUser, mockProgress, getProgress } from '../data/mock'
 import styles from './keys.module.css'
 
-export default function MyKeys() {
-  const bySlug = Object.fromEntries(books.map((b) => [b.slug, b]))
-
+export default function MyJourney() {
   const inProgress = books
     .filter((b) => mockProgress[b.slug] && mockProgress[b.slug].status === 'in-progress')
     .map((b) => ({ ...b, progress: getProgress(b.slug) }))
@@ -15,13 +13,11 @@ export default function MyKeys() {
 
   const booksCompleted = completed.length
 
-  const reward = getRewardProgress(mockUser.points)
-
   return (
     <div className={styles.keys}>
       <header className={styles.header}>
         <p className="eyebrow">Your journey</p>
-        <h1 className={styles.pageTitle}>My Keys</h1>
+        <h1 className={styles.pageTitle}>My Journey</h1>
       </header>
 
       {/* ── STATS ──────────────────────────────── */}
@@ -32,66 +28,11 @@ export default function MyKeys() {
         </div>
         <div className={styles.statCard}>
           <span className={styles.statNum}>{mockUser.keysRead}</span>
-          <span className={styles.statLabel}>Keys read</span>
+          <span className={styles.statLabel}>Chapters read</span>
         </div>
         <div className={styles.statCard}>
           <span className={styles.statNum}>{booksCompleted}</span>
           <span className={styles.statLabel}>Books done</span>
-        </div>
-      </section>
-
-      {/* ── READ TO EARN ───────────────────────── */}
-      <section className={styles.section}>
-        <p className="section-label">Rewards</p>
-        <div className={styles.rewardCard}>
-          <div className={styles.rewardTop}>
-            <div>
-              <p className={styles.rewardPoints}>{mockUser.points}</p>
-              <p className={styles.rewardPointsLabel}>points earned</p>
-            </div>
-            {reward.next ? (
-              <div className={styles.rewardNext}>
-                <p className={styles.rewardNextLabel}>Next reward</p>
-                <p className={styles.rewardNextTitle}>{reward.next.title}</p>
-                <p className={styles.rewardNextReward}>{reward.next.reward}</p>
-              </div>
-            ) : (
-              <div className={styles.rewardNext}>
-                <p className={styles.rewardNextTitle}>All rewards unlocked</p>
-              </div>
-            )}
-          </div>
-
-          {reward.next && (
-            <>
-              <div className={styles.rewardBar}>
-                <div className={styles.rewardFill} style={{ width: `${reward.percent}%` }} />
-              </div>
-              <p className={styles.rewardHint}>{reward.pointsToNext} points to {reward.next.title}</p>
-            </>
-          )}
-
-          <div className={styles.tierList}>
-            {rewardTiers.map((tier) => {
-              const isUnlocked = mockUser.points >= tier.threshold
-              return (
-                <div key={tier.threshold} className={`${styles.tier} ${isUnlocked ? styles.tierUnlocked : ''}`}>
-                  <span className={styles.tierIcon}>
-                    {isUnlocked ? (
-                      <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.8" /><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" strokeWidth="1.8" /></svg>
-                    )}
-                  </span>
-                  <span className={styles.tierInfo}>
-                    <span className={styles.tierTitle}>{tier.title}</span>
-                    <span className={styles.tierReward}>{tier.reward}</span>
-                  </span>
-                  <span className={styles.tierThreshold}>{tier.threshold}</span>
-                </div>
-              )
-            })}
-          </div>
         </div>
       </section>
 
@@ -141,31 +82,16 @@ export default function MyKeys() {
         </section>
       )}
 
-      {/* ── BOOKMARKS ──────────────────────────── */}
-      <section className={styles.section}>
-        <p className="section-label">Saved keys</p>
-        {mockBookmarks.length > 0 ? (
-          <div className={styles.list}>
-            {mockBookmarks.map((bm, i) => {
-              const book = bySlug[bm.bookSlug]
-              return (
-                <Link key={i} href={`/reader/${bm.bookSlug}?chapter=${bm.chapterNumber}`} className={styles.bookmarkCard}>
-                  <div className={styles.bookmarkIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M7 4h10v16l-5-4-5 4V4z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></svg>
-                  </div>
-                  <div className={styles.bookmarkBody}>
-                    <p className={styles.bookmarkTitle}>{bm.chapterTitle}</p>
-                    <p className={styles.bookmarkBook}>{book ? book.title : bm.bookSlug}</p>
-                    {bm.note && <p className={styles.bookmarkNote}>&ldquo;{bm.note}&rdquo;</p>}
-                  </div>
-                </Link>
-              )
-            })}
+      {/* Empty state if nothing started yet */}
+      {inProgress.length === 0 && completed.length === 0 && (
+        <section className={styles.section}>
+          <div className={styles.emptyJourney}>
+            <p className={styles.emptyTitle}>Your journey begins here</p>
+            <p className={styles.emptyText}>Open a book from the library and your progress will appear here.</p>
+            <Link href="/library" className="btn btn--primary">Explore the library</Link>
           </div>
-        ) : (
-          <p className={styles.empty}>Keys you bookmark while reading will appear here.</p>
-        )}
-      </section>
+        </section>
+      )}
     </div>
   )
 }
