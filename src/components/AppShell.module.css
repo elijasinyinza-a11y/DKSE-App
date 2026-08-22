@@ -1,0 +1,50 @@
+.bareShell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin-inline: auto;
+  background-color: var(--color-page);
+}
+
+/* ── BOTTOM NAV ───────────────────────── */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: 68px;
+  background-color: var(--color-card);
+  border-top: var(--border-thin) solid var(--color-border);
+  display: flex;
+  align-items: stretch;
+  z-index: var(--z-nav);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--color-muted);
+  transition: color var(--transition-fast);
+  padding-top: var(--space-2);
+}
+
+.navItem:hover {
+  color: var(--color-sub);
+}
+
+.navActive {
+  color: var(--color-amber);
+}
+
+.navLabel {
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+}
