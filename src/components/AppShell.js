@@ -5,7 +5,7 @@ import styles from './AppShell.module.css'
 const NAV_ITEMS = [
   { href: '/', label: 'Home', icon: HomeIcon },
   { href: '/library', label: 'Library', icon: LibraryIcon },
-  { href: '/keys', label: 'My Keys', icon: KeyIcon },
+  { href: '/keys', label: 'My Journey', icon: JourneyIcon },
   { href: '/moments', label: 'Moments', icon: MicIcon },
   { href: '/profile', label: 'Profile', icon: UserIcon },
 ]
@@ -59,11 +59,12 @@ function LibraryIcon() {
     </svg>
   )
 }
-function KeyIcon() {
+function JourneyIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden="true">
-      <circle cx="8" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M11.5 12H20M17 12v3M20 12v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M7 21c0-4 4-4 4-8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="1 3.5" />
+      <circle cx="7" cy="19" r="1.6" fill="currentColor" />
+      <path d="M13 4v9M13 4l6 1.5L13 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
