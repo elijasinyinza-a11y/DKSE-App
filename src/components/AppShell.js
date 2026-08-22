@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from './AppShell.module.css'
 
 const NAV_ITEMS = [
-  { href: '/', label: 'Home', icon: HomeIcon },
+  { href: '/home', label: 'Home', icon: HomeIcon },
   { href: '/library', label: 'Library', icon: LibraryIcon },
   { href: '/keys', label: 'My Journey', icon: JourneyIcon },
   { href: '/moments', label: 'Moments', icon: MicIcon },
@@ -11,7 +11,7 @@ const NAV_ITEMS = [
 ]
 
 // Routes that should NOT show the app shell chrome (e.g. auth screens)
-const BARE_ROUTES = ['/login', '/signup', '/welcome']
+const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
 
 export default function AppShell({ children }) {
   const router = useRouter()
@@ -28,8 +28,8 @@ export default function AppShell({ children }) {
       <nav className={styles.bottomNav} aria-label="Primary">
         {NAV_ITEMS.map((item) => {
           const active =
-            item.href === '/'
-              ? router.pathname === '/'
+            item.href === '/home'
+              ? router.pathname === '/home'
               : router.pathname.startsWith(item.href)
           const Icon = item.icon
           return (
