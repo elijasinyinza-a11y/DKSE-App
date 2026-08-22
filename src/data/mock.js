@@ -11,7 +11,30 @@ export const mockUser = {
   tier: 'free',            // 'free' | 'premium' | 'group'
   streak: 14,
   keysRead: 8,
+  points: 380,             // read-to-earn points accumulated
   joinedDate: '2026-06-01',
+}
+
+/* Read-to-earn reward tiers (status & access rewards only, no material rewards).
+   Points are earned for finishing keys, completing books, and streaks.
+   Thresholds unlock recognition and access — never material goods for now. */
+export const rewardTiers = [
+  { threshold: 100, title: 'Faithful Reader', reward: 'Recognition badge', kind: 'status' },
+  { threshold: 300, title: 'Diligent Seeker', reward: 'Bonus teaching unlocked', kind: 'access' },
+  { threshold: 600, title: 'Kingdom Steward', reward: 'Early access to the next volume', kind: 'access' },
+  { threshold: 1000, title: 'Exploits Champion', reward: 'Full series completion certificate', kind: 'status' },
+]
+
+/* Helper: given a points total, return progress toward the next reward tier */
+export function getRewardProgress(points) {
+  const sorted = [...rewardTiers].sort((a, b) => a.threshold - b.threshold)
+  const unlocked = sorted.filter((t) => points >= t.threshold)
+  const next = sorted.find((t) => points < t.threshold) || null
+  const prevThreshold = unlocked.length ? unlocked[unlocked.length - 1].threshold : 0
+  const span = next ? next.threshold - prevThreshold : 1
+  const into = points - prevThreshold
+  const percent = next ? Math.min(100, Math.round((into / span) * 100)) : 100
+  return { unlocked, next, percent, pointsToNext: next ? next.threshold - points : 0 }
 }
 
 /* Reading progress keyed by book slug.
