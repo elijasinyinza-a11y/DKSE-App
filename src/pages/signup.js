@@ -18,7 +18,7 @@ export default function SignUp() {
     }
     setError('')
     // Placeholder — real authentication is wired in the backend phase.
-    router.push('/')
+    router.push('/home')
   }
 
   return (
