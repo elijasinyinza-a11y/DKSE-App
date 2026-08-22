@@ -7,8 +7,8 @@ const NAV_ITEMS = [
   { href: '/home', label: 'Home', icon: HomeIcon },
   { href: '/library', label: 'Library', icon: LibraryIcon },
   { href: '/keys', label: 'My Journey', icon: JourneyIcon },
-  { href: '/community', label: 'Community', icon: CommunityIcon },
   { href: '/moments', label: 'Moments', icon: MicIcon },
+  { href: '/community', label: 'Community', icon: CommunityIcon },
 ]
 
 const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
