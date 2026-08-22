@@ -15,9 +15,13 @@ export const mockUser = {
   joinedDate: '2026-06-01',
 }
 
-/* Read-to-earn reward tiers (status & access rewards only, no material rewards).
-   Points are earned for finishing keys, completing books, and streaks.
-   Thresholds unlock recognition and access — never material goods for now. */
+/* ─────────────────────────────────────────────────────────
+   PARKED FOR LATER — Read-to-earn rewards & saved keys.
+   Removed from the UI pre-launch; to be reintroduced once
+   users have experienced the platform. Kept here so the
+   structure is ready when revisited.
+   ─────────────────────────────────────────────────────────
+
 export const rewardTiers = [
   { threshold: 100, title: 'Faithful Reader', reward: 'Recognition badge', kind: 'status' },
   { threshold: 300, title: 'Diligent Seeker', reward: 'Bonus teaching unlocked', kind: 'access' },
@@ -25,7 +29,6 @@ export const rewardTiers = [
   { threshold: 1000, title: 'Exploits Champion', reward: 'Full series completion certificate', kind: 'status' },
 ]
 
-/* Helper: given a points total, return progress toward the next reward tier */
 export function getRewardProgress(points) {
   const sorted = [...rewardTiers].sort((a, b) => a.threshold - b.threshold)
   const unlocked = sorted.filter((t) => points >= t.threshold)
@@ -36,6 +39,12 @@ export function getRewardProgress(points) {
   const percent = next ? Math.min(100, Math.round((into / span) * 100)) : 100
   return { unlocked, next, percent, pointsToNext: next ? next.threshold - points : 0 }
 }
+
+export const mockBookmarks = [
+  { bookSlug: 'seed-to-the-sower', chapterNumber: 1, chapterTitle: 'Tested to be Entrusted', note: 'God gives you what you can manage.' },
+  { bookSlug: 'money-at-the-gate', chapterNumber: 1, chapterTitle: 'Signs of the Times', note: '' },
+]
+   ───────────────────────────────────────────────────────── */
 
 /* Reading progress keyed by book slug.
    percent = 0..100, currentChapter = index into the book's chapters */
@@ -56,12 +65,6 @@ export const mockDailyKey = {
   declaration:
     'I am positioned at the gate. I am not a beggar at the gate but a steward within it. What God has prepared for me, I receive with faith and readiness.',
 }
-
-/* Bookmarks the user has saved */
-export const mockBookmarks = [
-  { bookSlug: 'seed-to-the-sower', chapterNumber: 1, chapterTitle: 'Tested to be Entrusted', note: 'God gives you what you can manage.' },
-  { bookSlug: 'money-at-the-gate', chapterNumber: 1, chapterTitle: 'Signs of the Times', note: '' },
-]
 
 /* Helper: get progress for a book slug (returns a default if none) */
 export function getProgress(slug) {
