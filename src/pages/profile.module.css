@@ -1,0 +1,223 @@
+.profile {
+  padding-bottom: var(--space-8);
+}
+
+.header {
+  padding: var(--space-6) var(--space-5) var(--space-4);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+  margin-top: var(--space-1);
+}
+
+/* ── IDENTITY ─────────────────────────── */
+.identitySection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-5) var(--space-6);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-amber-bg);
+  border: var(--border-medium) solid var(--color-amber-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-amber);
+  flex-shrink: 0;
+}
+
+.identityBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.email {
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+  margin-top: 2px;
+}
+
+.joined {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-top: var(--space-1);
+}
+
+/* ── SECTIONS ─────────────────────────── */
+.section {
+  padding: var(--space-2) var(--space-5) var(--space-5);
+}
+
+/* ── PLAN ─────────────────────────────── */
+.planCard {
+  background-color: var(--color-amber-light);
+  border: var(--border-thin) solid var(--color-amber-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+}
+
+.planTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.planName {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  margin-bottom: var(--space-1);
+}
+
+.planDesc {
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+  line-height: var(--leading-normal);
+}
+
+.upgradeBtn {
+  width: 100%;
+}
+
+/* ── SETTINGS GROUP ───────────────────── */
+.settingsGroup {
+  background-color: var(--color-card);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+  text-align: left;
+  border-bottom: var(--border-thin) solid var(--color-border);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowText {
+  flex: 1;
+  min-width: 0;
+}
+
+.rowLabel {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+}
+
+.rowDesc {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-top: 2px;
+  line-height: var(--leading-normal);
+}
+
+.rowRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.rowValue {
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+}
+
+.rowValueMuted {
+  color: var(--color-amber);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  font-weight: var(--weight-semibold);
+}
+
+.rowArrow {
+  color: var(--color-muted);
+}
+
+/* ── TOGGLE ───────────────────────────── */
+.toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-border-strong);
+  position: relative;
+  flex-shrink: 0;
+  transition: background-color var(--transition-base);
+}
+
+.toggleOn {
+  background-color: var(--color-amber);
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  transition: transform var(--transition-base);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggleOn .toggleKnob {
+  transform: translateX(18px);
+}
+
+/* ── SIGN OUT ─────────────────────────── */
+.signOut {
+  width: 100%;
+  padding: var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-sub);
+  background-color: var(--color-card);
+  border: var(--border-thin) solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.signOut:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.version {
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-top: var(--space-5);
+}
