@@ -54,6 +54,142 @@
   padding: var(--space-2) var(--space-5) var(--space-5);
 }
 
+/* ── READ TO EARN ─────────────────────── */
+.rewardCard {
+  background-color: var(--color-ink);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+}
+
+.rewardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.rewardPoints {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-amber-border);
+  line-height: 1;
+}
+
+.rewardPointsLabel {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: var(--space-1);
+}
+
+.rewardNext {
+  text-align: right;
+}
+
+.rewardNextLabel {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2px;
+}
+
+.rewardNextTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: #ffffff;
+}
+
+.rewardNextReward {
+  font-size: var(--text-xs);
+  color: var(--color-amber-border);
+  margin-top: 2px;
+}
+
+.rewardBar {
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.rewardFill {
+  height: 100%;
+  background-color: var(--color-amber);
+  border-radius: var(--radius-full);
+}
+
+.rewardHint {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: var(--space-5);
+}
+
+.tierList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border-top: var(--border-thin) solid rgba(255, 255, 255, 0.12);
+  padding-top: var(--space-4);
+}
+
+.tier {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  opacity: 0.5;
+}
+
+.tierUnlocked {
+  opacity: 1;
+}
+
+.tierIcon {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tierUnlocked .tierIcon {
+  background-color: var(--color-amber);
+  color: #ffffff;
+}
+
+.tierInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tierTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: #ffffff;
+}
+
+.tierReward {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.tierThreshold {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-amber-border);
+  flex-shrink: 0;
+}
+
 .list {
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { books } from '../data/content'
-import { mockUser, mockProgress, mockBookmarks, getProgress } from '../data/mock'
+import { mockUser, mockProgress, mockBookmarks, getProgress, rewardTiers, getRewardProgress } from '../data/mock'
 import styles from './keys.module.css'
 
 export default function MyKeys() {
@@ -14,6 +14,8 @@ export default function MyKeys() {
     .filter((b) => mockProgress[b.slug] && mockProgress[b.slug].status === 'complete')
 
   const booksCompleted = completed.length
+
+  const reward = getRewardProgress(mockUser.points)
 
   return (
     <div className={styles.keys}>
@@ -35,6 +37,61 @@ export default function MyKeys() {
         <div className={styles.statCard}>
           <span className={styles.statNum}>{booksCompleted}</span>
           <span className={styles.statLabel}>Books done</span>
+        </div>
+      </section>
+
+      {/* ── READ TO EARN ───────────────────────── */}
+      <section className={styles.section}>
+        <p className="section-label">Rewards</p>
+        <div className={styles.rewardCard}>
+          <div className={styles.rewardTop}>
+            <div>
+              <p className={styles.rewardPoints}>{mockUser.points}</p>
+              <p className={styles.rewardPointsLabel}>points earned</p>
+            </div>
+            {reward.next ? (
+              <div className={styles.rewardNext}>
+                <p className={styles.rewardNextLabel}>Next reward</p>
+                <p className={styles.rewardNextTitle}>{reward.next.title}</p>
+                <p className={styles.rewardNextReward}>{reward.next.reward}</p>
+              </div>
+            ) : (
+              <div className={styles.rewardNext}>
+                <p className={styles.rewardNextTitle}>All rewards unlocked</p>
+              </div>
+            )}
+          </div>
+
+          {reward.next && (
+            <>
+              <div className={styles.rewardBar}>
+                <div className={styles.rewardFill} style={{ width: `${reward.percent}%` }} />
+              </div>
+              <p className={styles.rewardHint}>{reward.pointsToNext} points to {reward.next.title}</p>
+            </>
+          )}
+
+          <div className={styles.tierList}>
+            {rewardTiers.map((tier) => {
+              const isUnlocked = mockUser.points >= tier.threshold
+              return (
+                <div key={tier.threshold} className={`${styles.tier} ${isUnlocked ? styles.tierUnlocked : ''}`}>
+                  <span className={styles.tierIcon}>
+                    {isUnlocked ? (
+                      <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.8" /><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" strokeWidth="1.8" /></svg>
+                    )}
+                  </span>
+                  <span className={styles.tierInfo}>
+                    <span className={styles.tierTitle}>{tier.title}</span>
+                    <span className={styles.tierReward}>{tier.reward}</span>
+                  </span>
+                  <span className={styles.tierThreshold}>{tier.threshold}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
