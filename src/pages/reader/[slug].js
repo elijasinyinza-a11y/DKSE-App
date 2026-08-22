@@ -65,7 +65,7 @@ export default function Reader({ book, slug }) {
 
       {chapters.length > 0 ? (
         <div className={styles.chapterList}>
-          <p className="section-label" style={{ padding: '0 20px' }}>Keys in this book</p>
+          <p className="section-label" style={{ padding: '0 20px' }}>Chapters</p>
           {chapters.map((ch, i) => {
             const done = prog.status === 'complete' || i < prog.currentChapter
             const current = prog.status === 'in-progress' && i === prog.currentChapter
@@ -113,7 +113,7 @@ function ReadingView({ book, slug, chapters, index, onBack, onNavigate }) {
       </div>
 
       <article className={styles.readBody}>
-        <p className={styles.readKicker}>{typeof ch.number === 'number' ? `Key ${ch.number}` : ch.number}</p>
+        <p className={styles.readKicker}>{typeof ch.number === 'number' ? `Chapter ${ch.number}` : ch.number}</p>
         <h1 className={styles.readTitle}>{ch.title}</h1>
 
         <div className={styles.readProse}>
@@ -138,7 +138,7 @@ function ReadingView({ book, slug, chapters, index, onBack, onNavigate }) {
         {isLast ? (
           <button className={`btn btn--primary ${styles.readNavPrimary}`} onClick={onBack}>Finish book</button>
         ) : (
-          <button className={`btn btn--primary ${styles.readNavPrimary}`} onClick={() => onNavigate(index + 1)}>Next key</button>
+          <button className={`btn btn--primary ${styles.readNavPrimary}`} onClick={() => onNavigate(index + 1)}>Next chapter</button>
         )}
       </div>
     </div>
