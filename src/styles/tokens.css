@@ -48,16 +48,16 @@
   /* ----------------------------------------------------------
      TYPOGRAPHY — Scale
   ---------------------------------------------------------- */
-  --text-xs:      10px;
-  --text-sm:      11px;
-  --text-base:    13px;
-  --text-md:      14px;
-  --text-lg:      16px;
-  --text-xl:      18px;
-  --text-2xl:     22px;
-  --text-3xl:     26px;
-  --text-4xl:     30px;
-  --text-hero:    36px;
+  --text-xs:      11px;
+  --text-sm:      12px;
+  --text-base:    14px;
+  --text-md:      15px;
+  --text-lg:      17px;
+  --text-xl:      20px;
+  --text-2xl:     24px;
+  --text-3xl:     28px;
+  --text-4xl:     32px;
+  --text-hero:    38px;
 
   /* ----------------------------------------------------------
      TYPOGRAPHY — Weight
