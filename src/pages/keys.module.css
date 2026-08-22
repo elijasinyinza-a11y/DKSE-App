@@ -1,0 +1,223 @@
+.keys {
+  padding-bottom: var(--space-6);
+}
+
+.header {
+  padding: var(--space-6) var(--space-5) var(--space-4);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+  margin-top: var(--space-1);
+}
+
+/* ── STATS ────────────────────────────── */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  padding: 0 var(--space-5) var(--space-5);
+}
+
+.statCard {
+  background-color: var(--color-card);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.statNum {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-amber);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  font-weight: var(--weight-medium);
+}
+
+/* ── SECTIONS ─────────────────────────── */
+.section {
+  padding: var(--space-2) var(--space-5) var(--space-5);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ── ROW CARD (books) ─────────────────── */
+.rowCard {
+  display: flex;
+  gap: var(--space-4);
+  background-color: var(--color-card);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  transition: border-color var(--transition-fast);
+}
+
+.rowCard:hover {
+  border-color: var(--color-amber-border);
+}
+
+.rowCover {
+  width: 52px;
+  height: 78px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: var(--border-thin) solid var(--color-border);
+  position: relative;
+}
+
+.rowCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doneBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rowBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rowVol {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-amber);
+  font-weight: var(--weight-semibold);
+  margin-bottom: 2px;
+}
+
+.rowTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.progressBar {
+  height: 5px;
+  background-color: var(--color-card-alt);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-1);
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-amber);
+  border-radius: var(--radius-full);
+}
+
+.rowMeta {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.rowDone {
+  font-size: var(--text-xs);
+  color: var(--color-amber);
+  font-weight: var(--weight-medium);
+}
+
+/* ── BOOKMARKS ────────────────────────── */
+.bookmarkCard {
+  display: flex;
+  gap: var(--space-3);
+  background-color: var(--color-card);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  transition: border-color var(--transition-fast);
+}
+
+.bookmarkCard:hover {
+  border-color: var(--color-amber-border);
+}
+
+.bookmarkIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-amber-bg);
+  border: var(--border-thin) solid var(--color-amber-border);
+  color: var(--color-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bookmarkBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.bookmarkTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  line-height: var(--leading-snug);
+  margin-bottom: 2px;
+}
+
+.bookmarkBook {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-bottom: var(--space-2);
+}
+
+.bookmarkNote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+  line-height: var(--leading-normal);
+  border-left: var(--border-medium) solid var(--color-amber-border);
+  padding-left: var(--space-3);
+}
+
+.empty {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  line-height: var(--leading-relaxed);
+  padding: var(--space-5);
+  text-align: center;
+  background-color: var(--color-card-alt);
+  border: var(--border-thin) dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
