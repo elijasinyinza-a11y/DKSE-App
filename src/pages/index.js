@@ -26,14 +26,14 @@ export default function Home() {
 
       <section className={styles.screenSection}>
         <p className="section-label">Daily wisdom</p>
-        <Link href={`/reader/${mockDailyKey.bookSlug}?chapter=${mockDailyKey.chapterNumber}`} className={styles.dailyCard}>
+        <Link href={`/reader/${mockDailyKey.bookSlug}`} className={styles.dailyCard}>
           <div className={styles.dailyTop}>
             <span className="pill pill--amber"><KeyMini /> Today&apos;s key</span>
-            <span className={styles.dailyBook}>{mockDailyKey.bookTitle}</span>
+            <span className={styles.dailyBook}>from {mockDailyKey.bookTitle}</span>
           </div>
           <h2 className={styles.dailyTitle}>{mockDailyKey.chapterTitle}</h2>
           <p className={styles.dailyExcerpt}>{mockDailyKey.excerpt}</p>
-          <span className={styles.dailyCta}>Read today&apos;s key <ArrowIcon /></span>
+          <span className={styles.dailyCta}>Explore the source <ArrowIcon /></span>
         </Link>
       </section>
 
