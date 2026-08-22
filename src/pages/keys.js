@@ -74,7 +74,7 @@ export default function MyJourney() {
                 <div className={styles.rowBody}>
                   <p className={styles.rowVol}>{book.volume}</p>
                   <p className={styles.rowTitle}>{book.title}</p>
-                  <p className={styles.rowDone}>Completed \u00b7 Read again</p>
+                  <p className={styles.rowDone}>Completed · Read again</p>
                 </div>
               </Link>
             ))}
