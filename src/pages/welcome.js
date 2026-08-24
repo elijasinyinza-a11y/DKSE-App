@@ -74,8 +74,7 @@ export default function Welcome() {
         </Link>
 
         <p className={styles.trustLine}>
-          Apostle Elijah Sinyinza · Zambia<br />
-          Read by believers worldwide
+          A Divine Keys Christian Network ministry
         </p>
       </div>
 
