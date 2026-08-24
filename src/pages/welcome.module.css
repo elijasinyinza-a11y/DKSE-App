@@ -37,11 +37,11 @@
 }
 
 .logoImg {
-  height: 88px;
+  height: 100px;
   width: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 4px 16px rgba(146, 96, 10, 0.5));
+  filter: drop-shadow(0 6px 20px rgba(146, 96, 10, 0.6));
 }
 
 .heroEyebrow {

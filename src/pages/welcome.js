@@ -13,10 +13,10 @@ export default function Welcome() {
       <div className={styles.hero}>
         <div className={styles.heroGlow} />
 
-        {/* Transparent logo on dark background */}
+        {/* New standalone logo mark */}
         <div className={styles.logoWrap}>
           <img
-            src="/images/brand/logo-transparent.png"
+            src="/images/brand/logo-mark.png"
             alt="Divine Keys for Spiritual Exploits"
             className={styles.logoImg}
           />
