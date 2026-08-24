@@ -16,16 +16,15 @@
   text-align: center;
 }
 
-.logoMark {
-  width: 64px;
-  height: 64px;
-  background-color: var(--color-amber);
-  border-radius: var(--radius-xl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logoWrap {
   margin-bottom: var(--space-6);
-  box-shadow: 0 8px 24px rgba(146, 96, 10, 0.25);
+}
+
+.welcomeLogo {
+  height: 64px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .welcomeEyebrow {

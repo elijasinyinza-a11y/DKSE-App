@@ -5,12 +5,12 @@ export default function Welcome() {
   return (
     <div className={styles.welcome}>
       <div className={styles.welcomeHero}>
-        <div className={styles.logoMark}>
-          <svg viewBox="0 0 32 32" fill="none" width="30" height="30">
-            <circle cx="11" cy="16" r="6" stroke="#fff" strokeWidth="2" />
-            <circle cx="11" cy="16" r="2" fill="#fff" />
-            <path d="M16.5 16H27M23 16v4M27 16v3" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
-          </svg>
+        <div className={styles.logoWrap}>
+          <img
+            src="/images/brand/logo.png"
+            alt="Divine Keys for Spiritual Exploits"
+            className={styles.welcomeLogo}
+          />
         </div>
         <p className={styles.welcomeEyebrow}>Empowered to prosper</p>
         <h1 className={styles.welcomeTitle}>Divine Keys<br />for Spiritual Exploits</h1>
