@@ -20,9 +20,9 @@ export default function Welcome() {
             alt="Divine Keys for Spiritual Exploits"
             className={styles.logoImg}
           />
+          <p className={styles.logoName}>Divine Keys</p>
+          <p className={styles.logoSub}>for Spiritual Exploits</p>
         </div>
-
-        <p className={styles.heroEyebrow}>Empowered to prosper</p>
 
         <h1 className={styles.heroTitle}>
           Wisdom to navigate life towards your God-ordained purpose
