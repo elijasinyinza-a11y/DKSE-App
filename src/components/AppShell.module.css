@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   padding-inline: var(--space-5);
-  background-color: var(--color-page);
+  background-color: #ffffff;
   border-bottom: var(--border-thin) solid var(--color-border);
   z-index: var(--z-nav);
 }
