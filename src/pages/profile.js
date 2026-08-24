@@ -88,6 +88,7 @@ export default function Profile() {
         <div className={styles.settingsGroup}>
           <LinkRow label="Help & FAQ" value="" />
           <LinkRow label="Contact us" value="" />
+          <LinkRow label="Find a stockist" value="" href="https://divinekeys.com/partners" />
           <LinkRow label="Privacy policy" value="" />
           <LinkRow label="Terms of use" value="" />
         </div>
@@ -145,14 +146,18 @@ function ToggleRow({ label, desc, on, onToggle }) {
   )
 }
 
-function LinkRow({ label, value, muted }) {
-  return (
-    <button className={styles.row}>
+function LinkRow({ label, value, muted, href }) {
+  const content = (
+    <>
       <p className={styles.rowLabel}>{label}</p>
       <span className={styles.rowRight}>
         {value && <span className={`${styles.rowValue} ${muted ? styles.rowValueMuted : ''}`}>{value}</span>}
         <svg viewBox="0 0 24 24" fill="none" width="18" height="18" className={styles.rowArrow}><path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </span>
-    </button>
+    </>
   )
+  if (href) {
+    return <a href={href} target="_blank" rel="noopener noreferrer" className={styles.row}>{content}</a>
+  }
+  return <button className={styles.row}>{content}</button>
 }
