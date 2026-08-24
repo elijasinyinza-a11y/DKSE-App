@@ -28,8 +28,8 @@ export default function AppShell({ children }) {
       <header className={styles.topBar}>
         <Link href="/home" className={styles.brandMark}>
           <img
-            src="/images/brand/logo.png"
-            alt="Divine Keys for Spiritual Exploits"
+            src="/images/brand/logo-mark.png"
+            alt="Divine Keys"
             className={styles.logoImg}
           />
         </Link>
