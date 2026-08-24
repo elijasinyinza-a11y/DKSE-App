@@ -44,7 +44,6 @@ export default function Welcome() {
                 backgroundImage: book.coverImage ? `url(${book.coverImage})` : undefined,
                 backgroundColor: book.coverImage ? undefined : book.coverColor,
                 transform: `rotate(${[-3,-1,1,-2,2,-1,3,-2][i % 8]}deg)`,
-                height: `${[64,72,78,68,74,70,76,66][i % 8]}px`,
               }}
             />
           ))}
