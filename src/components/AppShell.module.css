@@ -10,13 +10,14 @@
 .topBar {
   position: sticky;
   top: 0;
-  height: 48px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-inline: var(--space-5);
   background-color: #ffffff;
   border-bottom: var(--border-thin) solid var(--color-border);
+  box-shadow: 0 1px 6px rgba(28, 25, 23, 0.06);
   z-index: var(--z-nav);
 }
 
@@ -26,8 +27,8 @@
 }
 
 .logoImg {
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: auto;
   display: block;
   object-fit: contain;
 }
