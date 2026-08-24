@@ -21,14 +21,15 @@
 }
 
 .brandMark {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-amber);
-  color: #ffffff;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+
+.logoImg {
+  height: 28px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .avatar {

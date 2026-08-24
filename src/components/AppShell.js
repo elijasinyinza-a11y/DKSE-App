@@ -27,11 +27,11 @@ export default function AppShell({ children }) {
       {/* Top bar with avatar/profile link */}
       <header className={styles.topBar}>
         <Link href="/home" className={styles.brandMark}>
-          <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-            <circle cx="8" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
-            <circle cx="8" cy="12" r="1.5" fill="currentColor" />
-            <path d="M11.5 12H20M17 12v3M20 12v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          </svg>
+          <img
+            src="/images/brand/logo.png"
+            alt="Divine Keys for Spiritual Exploits"
+            className={styles.logoImg}
+          />
         </Link>
         <Link href="/profile" className={styles.avatar} aria-label="Profile">
           {initials}
