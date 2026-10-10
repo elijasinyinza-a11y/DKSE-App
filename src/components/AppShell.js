@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { mockUser } from '../data/mock'
+import SophiaMark from './SophiaMark'
 import styles from './AppShell.module.css'
 
 const NAV_ITEMS = [
@@ -8,7 +9,7 @@ const NAV_ITEMS = [
   { href: '/library', label: 'Library', icon: LibraryIcon },
   { href: '/keys', label: 'My Journey', icon: JourneyIcon },
   { href: '/moments', label: 'Moments', icon: MicIcon },
-  { href: '/community', label: 'Community', icon: CommunityIcon },
+  { href: '/sophia', label: 'Sophia', icon: SophiaMark },
 ]
 
 const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
@@ -70,16 +71,6 @@ function JourneyIcon() {
       <path d="M13 4v9M13 4l6 1.5L13 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="7" cy="19" r="1.6" fill="currentColor" />
       <path d="M7 17c0-4 4-4 4-8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="1 3.5" />
-    </svg>
-  )
-}
-function CommunityIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden="true">
-      <circle cx="9" cy="7" r="3" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M3 20c0-3 2.7-5 6-5s6 2 6 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="17" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M21 20c0-2.5-1.8-4-4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   )
 }
