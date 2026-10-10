@@ -69,10 +69,6 @@
   transition: transform var(--transition-fast);
 }
 
-.dailyCard:active {
-  transform: scale(0.99);
-}
-
 .dailyTop {
   display: flex;
   align-items: center;
@@ -101,6 +97,41 @@
   color: var(--color-sub);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-4);
+}
+
+/* Actions on the daily wisdom card */
+.dailyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.reflectBtn {
+  flex: 1;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  border-radius: 10px;
+  background-color: #0a1a38;
+  color: #F3D99A;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+}
+
+.sourceBtn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  border-radius: 10px;
+  border: var(--border-thin) solid var(--color-amber-border);
+  color: var(--color-amber);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
 }
 
 .dailyCta {

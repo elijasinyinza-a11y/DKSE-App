@@ -333,3 +333,89 @@
 .readNavPrimary {
   margin-left: auto;
 }
+
+/* ── SOPHIA: REFLECT CARD ─────────────── */
+.reflectCard {
+  margin-top: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px var(--space-4);
+  border: var(--border-thin) solid var(--color-amber-border);
+  background-color: var(--color-amber-light);
+  border-radius: var(--radius-lg);
+  color: var(--color-ink);
+}
+
+.reflectMark {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: #0a1a38;
+  color: #F3D99A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reflectBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reflectTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+}
+
+.reflectText {
+  font-size: var(--text-sm);
+  color: var(--color-sub);
+}
+
+.reflectArrow { color: var(--color-amber); flex-shrink: 0; }
+
+/* ── SOPHIA: SELECTION BAR ────────────── */
+.selectionBar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(64px + var(--space-4) + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  background-color: #0a1a38;
+  box-shadow: 0 8px 24px rgba(5, 13, 31, 0.35);
+  z-index: var(--z-overlay);
+}
+
+.selectionAsk {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--space-3);
+  border-radius: 9px;
+  background-color: #1d3a7a;
+  color: #F3D99A;
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+}
+
+.selectionBtn {
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #E7E2DB;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}

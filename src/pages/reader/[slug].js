@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { bookDetails } from '../../data/books'
 import { getProgress } from '../../data/mock'
+import SophiaMark from '../../components/SophiaMark'
 import styles from './reader.module.css'
 
 export default function Reader({ book, slug }) {
@@ -115,6 +116,57 @@ function ReadingView({ book, slug, chapters, index, onBack, onNavigate }) {
   const ch = chapters[index]
   const isFirst = index === 0
   const isLast = index === chapters.length - 1
+  const chapterLabel = typeof ch.number === 'number' ? `Chapter ${ch.number}` : ch.number
+  const articleRef = useRef(null)
+  const [selected, setSelected] = useState('')
+
+  // Watch text selection inside the chapter; show the Ask Sophia bar while
+  // the reader has a passage selected.
+  // Hiding is delayed slightly: on phones, tapping the bar can clear the
+  // selection a moment before the tap registers.
+  useEffect(() => {
+    let hideTimer
+    function onSelectionChange() {
+      const sel = window.getSelection()
+      const text = sel ? sel.toString().trim() : ''
+      const inside = sel && sel.rangeCount > 0 && articleRef.current?.contains(sel.getRangeAt(0).commonAncestorContainer)
+      clearTimeout(hideTimer)
+      if (inside && text.length > 2) {
+        setSelected(text.slice(0, 600))
+      } else {
+        hideTimer = setTimeout(() => setSelected(''), 400)
+      }
+    }
+    document.addEventListener('selectionchange', onSelectionChange)
+    return () => {
+      clearTimeout(hideTimer)
+      document.removeEventListener('selectionchange', onSelectionChange)
+    }
+  }, [])
+
+  // Clear any selection when moving to another chapter.
+  useEffect(() => {
+    window.getSelection()?.removeAllRanges()
+    setSelected('')
+  }, [index])
+
+  const askAboutPassage = {
+    pathname: '/sophia/chat',
+    query: { q: `What does this passage from ${book.title} mean for my life? “${selected}”` },
+  }
+  const reflectOnChapter = {
+    pathname: '/sophia/chat',
+    query: { q: `Help me reflect on “${ch.title}” from ${book.title}.` },
+  }
+
+  function sharePassage() {
+    const text = `“${selected}”\n\n— ${book.title}, Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
+    if (navigator.share) {
+      navigator.share({ text }).catch(() => {})
+    } else {
+      navigator.clipboard.writeText(text).catch(() => {})
+    }
+  }
 
   return (
     <div className={styles.readingView}>
@@ -126,8 +178,8 @@ function ReadingView({ book, slug, chapters, index, onBack, onNavigate }) {
         <span style={{ width: 20 }} />
       </div>
 
-      <article className={styles.readBody}>
-        <p className={styles.readKicker}>{typeof ch.number === 'number' ? `Chapter ${ch.number}` : ch.number}</p>
+      <article className={styles.readBody} ref={articleRef}>
+        <p className={styles.readKicker}>{chapterLabel}</p>
         <h1 className={styles.readTitle}>{ch.title}</h1>
 
         <div className={styles.readProse}>
@@ -143,7 +195,25 @@ function ReadingView({ book, slug, chapters, index, onBack, onNavigate }) {
           <p className={styles.readDeclLabel}>Declaration</p>
           <p className={styles.readDeclText}>I receive this key by faith. I am equipped, positioned and ready for the exploits God has prepared for me.</p>
         </div>
+
+        <Link href={reflectOnChapter} className={styles.reflectCard}>
+          <span className={styles.reflectMark}><SophiaMark size={18} /></span>
+          <span className={styles.reflectBody}>
+            <span className={styles.reflectTitle}>Reflect on this with Sophia</span>
+            <span className={styles.reflectText}>Talk through what this chapter means for your life.</span>
+          </span>
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true" className={styles.reflectArrow}><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </Link>
       </article>
+
+      {selected && (
+        <div className={styles.selectionBar} role="toolbar" aria-label="Selected passage" onMouseDown={(e) => e.preventDefault()}>
+          <Link href={askAboutPassage} className={styles.selectionAsk}>
+            <SophiaMark size={16} /> Ask Sophia
+          </Link>
+          <button className={styles.selectionBtn} onClick={sharePassage}>Share</button>
+        </div>
+      )}
 
       <div className={styles.readNav}>
         <button className={styles.readNavBtn} disabled={isFirst} onClick={() => !isFirst && onNavigate(index - 1)}>

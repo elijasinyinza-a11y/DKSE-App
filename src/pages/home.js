@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { books } from '../data/content'
 import { mockUser, mockDailyKey, mockProgress, getProgress } from '../data/mock'
+import SophiaMark from '../components/SophiaMark'
 import styles from './home.module.css'
 
 export default function Home() {
@@ -50,15 +51,23 @@ export default function Home() {
 
       <section className={styles.screenSection}>
         <p className="section-label">Daily wisdom</p>
-        <Link href={`/reader/${mockDailyKey.bookSlug}`} className={styles.dailyCard}>
+        <div className={styles.dailyCard}>
           <div className={styles.dailyTop}>
             <span className="pill pill--amber"><KeyMini /> Today&apos;s key</span>
             <span className={styles.dailyBook}>from {mockDailyKey.bookTitle}</span>
           </div>
           <h2 className={styles.dailyTitle}>{mockDailyKey.chapterTitle}</h2>
           <p className={styles.dailyExcerpt}>{mockDailyKey.excerpt}</p>
-          <span className={styles.dailyCta}>Explore the source <ArrowIcon /></span>
-        </Link>
+          <div className={styles.dailyActions}>
+            <Link
+              href={{ pathname: '/sophia/chat', query: { q: `Help me reflect on today’s key: “${mockDailyKey.excerpt}”` } }}
+              className={styles.reflectBtn}
+            >
+              <SophiaMark size={18} /> Reflect with Sophia
+            </Link>
+            <Link href={`/reader/${mockDailyKey.bookSlug}`} className={styles.sourceBtn}>Read source</Link>
+          </div>
+        </div>
       </section>
 
       <section className={styles.screenSection}>

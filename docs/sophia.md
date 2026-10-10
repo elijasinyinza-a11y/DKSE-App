@@ -34,6 +34,12 @@ Status:
   general reply, and a crisis referral) so the flow can be reviewed
   before the AI is connected. "Save as a key" shows a confirmation only;
   saving arrives with accounts in the backend phase.
+- Step 3 — Home and Reader entry points: done. Home's daily wisdom card
+  has "Reflect with Sophia". In the Reader, selecting text shows an
+  "Ask Sophia / Share" bar, and each chapter ends with a "Reflect on
+  this with Sophia" card. Highlighting is left for the backend phase,
+  when highlights can be saved.
+- Next — connect the real AI (needs an Anthropic API key in Vercel).
 
 ## Rules she works under
 
