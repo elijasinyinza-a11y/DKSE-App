@@ -39,6 +39,10 @@ Status:
   "Ask Sophia / Share" bar, and each chapter ends with a "Reflect on
   this with Sophia" card. Highlighting is left for the backend phase,
   when highlights can be saved.
+- Home daily wisdom now comes from "Wisdom for Living a Victorious Life"
+  (`src/data/daily-wisdom.js`), one quote per day. The source is silent on
+  Home: no book, chapter or source link, whichever book a quote comes from.
+  When Sophia reflects on today's key she keeps the source silent too.
 - Next — connect the real AI (needs an Anthropic API key in Vercel).
 
 ## Rules she works under

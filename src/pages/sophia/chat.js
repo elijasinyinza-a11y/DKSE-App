@@ -154,13 +154,13 @@ function Block({ block }) {
     return (
       <figure className={styles.quote}>
         <blockquote className={styles.quoteText}>“{block.text}”</blockquote>
-        <figcaption className={styles.quoteSource}>
+        {block.bookTitle && (<figcaption className={styles.quoteSource}>
           {block.bookSlug ? (
             <Link href={`/reader/${block.bookSlug}`} className={styles.quoteLink}><BookIcon />{block.bookTitle} · Read in context</Link>
           ) : (
             <span className={styles.quoteBook}><BookIcon />{block.bookTitle}</span>
           )}
-        </figcaption>
+        </figcaption>)}
       </figure>
     )
   }
@@ -179,7 +179,7 @@ function blocksToText(blocks = [], { forSharing = false } = {}) {
   return blocks
     .filter((b) => !forSharing || b.type !== 'text')
     .map((b) => {
-      if (b.type === 'quote') return `“${b.text}” — ${b.bookTitle}`
+      if (b.type === 'quote') return b.bookTitle ? `“${b.text}” — ${b.bookTitle}` : `“${b.text}”`
       if (b.type === 'verse') return `${b.text} (${b.ref}, ${b.translation})`
       return b.text
     })

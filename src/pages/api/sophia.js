@@ -5,7 +5,7 @@
 
    Block types:
      { type: 'text',  text }
-     { type: 'quote', text, bookTitle, bookSlug }   bookSlug may be null
+     { type: 'quote', text, bookTitle, bookSlug }   bookTitle null = source silent
      { type: 'verse', ref, text, translation }      text from the stored Bible
 
    SAMPLE MODE: replies below are written in advance so the screens
@@ -16,7 +16,7 @@
    ============================================================ */
 
 import { getVerse } from '../../data/bible-kjv'
-import { mockDailyKey } from '../../data/mock'
+import { getTodaysWisdom, dailyWisdom } from '../../data/daily-wisdom'
 
 const WISDOM_BOOK = 'Wisdom for Living a Victorious Life'
 
@@ -63,12 +63,16 @@ function draftReply(text) {
     ]
   }
 
-  if (/today.?s key|gate/i.test(text)) {
+  // Today's key: the source stays silent, as on the Home screen.
+  if (/today.?s key/i.test(text)) {
+    const quoted = text.match(/“([^”]+)”/)?.[1]
+    const entry = dailyWisdom.find((w) => w.quote === quoted) || getTodaysWisdom()
     return [
-      { type: 'text', text: `Today’s key comes from ${mockDailyKey.bookTitle}, in the chapter “${mockDailyKey.chapterTitle}”.` },
-      { type: 'quote', text: mockDailyKey.excerpt, bookTitle: mockDailyKey.bookTitle, bookSlug: mockDailyKey.bookSlug },
-      { type: 'verse', ref: 'Deuteronomy 8:18' },
-      { type: 'text', text: 'The gate is where decisions, trade and influence happen. Where is your “gate” right now: your work, your business, or your community?' },
+      { type: 'text', text: 'Let us sit with today’s key together.' },
+      { type: 'quote', text: entry.quote, bookTitle: null, bookSlug: null },
+      { type: 'text', text: entry.reflection },
+      { type: 'verse', ref: 'Proverbs 4:7' },
+      { type: 'text', text: 'Where in your life this week could you put this key to work?' },
     ]
   }
 

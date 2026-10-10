@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { books } from '../data/content'
-import { mockUser, mockDailyKey, mockProgress, getProgress } from '../data/mock'
+import { mockUser, mockProgress, getProgress } from '../data/mock'
+import { getTodaysWisdom } from '../data/daily-wisdom'
 import SophiaMark from '../components/SophiaMark'
 import styles from './home.module.css'
 
 export default function Home() {
   const [toast, setToast] = useState('')
+  // Chosen after the page loads so it follows the reader's own date.
+  const [wisdom, setWisdom] = useState(null)
+  useEffect(() => { setWisdom(getTodaysWisdom()) }, [])
 
   const continueReading = books
     .filter((b) => mockProgress[b.slug] && mockProgress[b.slug].status === 'in-progress')
@@ -14,10 +18,10 @@ export default function Home() {
 
   const greeting = getGreeting()
 
-  function handleShare(type) {
-    const wisdomText = `"${mockDailyKey.excerpt}"\n\n— from ${mockDailyKey.bookTitle}, Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
-    const declarationText = `Today I declare:\n\n"${mockDailyKey.declaration}"\n\n— Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
-    const text = type === 'wisdom' ? wisdomText : declarationText
+  // The source stays silent: shared text names the app, never the book.
+  function handleShare() {
+    if (!wisdom) return
+    const text = `"${wisdom.quote}"\n\n— Divine Keys for Spiritual Exploits\n\nJoin the journey: https://divinekeys.com`
 
     if (navigator.share) {
       // Native share sheet — works on mobile (WhatsApp, Facebook, SMS, etc.)
@@ -51,35 +55,38 @@ export default function Home() {
 
       <section className={styles.screenSection}>
         <p className="section-label">Daily wisdom</p>
-        <div className={styles.dailyCard}>
+        <div className={styles.dailyCard} aria-busy={!wisdom}>
           <div className={styles.dailyTop}>
             <span className="pill pill--amber"><KeyMini /> Today&apos;s key</span>
-            <span className={styles.dailyBook}>from {mockDailyKey.bookTitle}</span>
           </div>
-          <h2 className={styles.dailyTitle}>{mockDailyKey.chapterTitle}</h2>
-          <p className={styles.dailyExcerpt}>{mockDailyKey.excerpt}</p>
-          <div className={styles.dailyActions}>
-            <Link
-              href={{ pathname: '/sophia/chat', query: { q: `Help me reflect on today’s key: “${mockDailyKey.excerpt}”` } }}
-              className={styles.reflectBtn}
-            >
-              <SophiaMark size={18} /> Reflect with Sophia
-            </Link>
-            <Link href={`/reader/${mockDailyKey.bookSlug}`} className={styles.sourceBtn}>Read source</Link>
-          </div>
+          {wisdom && (
+            <>
+              <h2 className={styles.dailyTitle}>{wisdom.quote}</h2>
+              <p className={styles.dailyExcerpt}>{wisdom.reflection}</p>
+              <div className={styles.dailyActions}>
+                <Link
+                  href={{ pathname: '/sophia/chat', query: { q: `Help me reflect on today’s key: “${wisdom.quote}”` } }}
+                  className={styles.reflectBtn}
+                >
+                  <SophiaMark size={18} /> Reflect with Sophia
+                </Link>
+                <button className={styles.shareBtn} onClick={handleShare} aria-label="Share today’s wisdom">
+                  <ShareIcon />
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
-      <section className={styles.screenSection}>
-        <div className={styles.declaration}>
-          <p className={styles.declLabel}>Declare this today</p>
-          <p className={styles.declText}>{mockDailyKey.declaration}</p>
-          <div className={styles.shareRow}>
-            <button className={styles.declShare} onClick={() => handleShare('wisdom')}><ShareIcon /> Share today&apos;s wisdom</button>
-            <button className={styles.declShare} onClick={() => handleShare('declaration')}><ShareIcon /> Share declaration</button>
+      {wisdom?.declaration && (
+        <section className={styles.screenSection}>
+          <div className={styles.declaration}>
+            <p className={styles.declLabel}>Declare this today</p>
+            <p className={styles.declText}>{wisdom.declaration}</p>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {continueReading.length > 0 && (
         <section className={styles.screenSection}>
