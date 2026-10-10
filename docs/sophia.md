@@ -27,6 +27,14 @@ Sophia is a presence across the app, with a tab of her own:
 Rollout order: Sophia tab first, then the conversation screen, then the
 Home and Reader entry points, then the real AI connection.
 
+Status:
+- Step 1 — Sophia tab: done.
+- Step 2 — Conversation screen: done, in sample mode. `/api/sophia`
+  returns prepared replies (setback, purpose, finances, today's key, a
+  general reply, and a crisis referral) so the flow can be reviewed
+  before the AI is connected. "Save as a key" shows a confirmation only;
+  saving arrives with accounts in the backend phase.
+
 ## Rules she works under
 
 - **Sources.** She answers from Scripture and the Divine Keys books
@@ -61,9 +69,21 @@ Home and Reader entry points, then the real AI connection.
 - The AI is called only from a server route (`/api/sophia`). The API
   key lives in Vercel environment variables, never in browser code.
 - Until the AI is connected, the route returns sample replies so the
-  screens can ship first.
+  screens can ship first. Connecting the AI only changes `draftReply()`
+  in `src/pages/api/sophia.js`.
+- Replies are blocks: `text`, `quote` (book quote with title and
+  optional reader link) and `verse`. The AI names verse references only;
+  the route fills the text from `src/data/bible-kjv.js` (a sample set
+  for now; the full KJV moves to Supabase). Unknown references are
+  dropped, never guessed.
+- Messages matching crisis patterns get a referral to real people
+  instead of a normal answer. The real AI keeps this check as a
+  safeguard in front of the model.
+- The conversation screen is full-screen: `AppShell.js` hides the top
+  bar and bottom nav on `/sophia/chat`.
 
 ## Open items
 
-- Zambian crisis helpline number for the conversation screen.
+- Zambian crisis helpline number: set `helpline` in `src/data/sophia.js`
+  (until then the notice refers people to a pastor or counsellor).
 - Final daily message limit.

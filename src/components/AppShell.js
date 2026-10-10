@@ -13,6 +13,8 @@ const NAV_ITEMS = [
 ]
 
 const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
+// Full-screen app routes: keep the app frame but hide the top bar and bottom nav.
+const FULLSCREEN_ROUTES = ['/sophia/chat']
 
 export default function AppShell({ children }) {
   const router = useRouter()
@@ -21,6 +23,10 @@ export default function AppShell({ children }) {
 
   if (isBare) {
     return <div className={styles.bareShell}>{children}</div>
+  }
+
+  if (FULLSCREEN_ROUTES.includes(router.pathname)) {
+    return <div className="app-shell">{children}</div>
   }
 
   return (

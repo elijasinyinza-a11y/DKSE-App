@@ -6,7 +6,7 @@
   justify-content: space-between;
   padding: var(--space-4) var(--space-5);
   position: sticky;
-  top: 0;
+  top: 56px;                     /* sit just below the app's top bar */
   background-color: var(--color-page);
   z-index: var(--z-raised);
 }

@@ -82,7 +82,7 @@ select {
 .app-main {
   flex: 1;
   padding-bottom: 80px;          /* clear the bottom nav */
-  padding-top: 56px;             /* clear the top bar */
+  /* No top padding: the top bar is sticky, so it already takes its own space. */
 }
 
 /* ----------------------------------------------------------
