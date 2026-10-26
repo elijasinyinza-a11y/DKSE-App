@@ -382,9 +382,6 @@
 }
 
 /* ── TABLET AND DESKTOP ───────────────── */
-.keys {
-  --page-max: 960px;
-}
 
 @media (min-width: 768px) {
   .pageTitle {
@@ -400,5 +397,11 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

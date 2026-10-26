@@ -65,10 +65,10 @@ select {
 
 /* ----------------------------------------------------------
    APP SHELL LAYOUT
-   Phone: one column with top bar and bottom nav.
-   Tablet and desktop: side navigation beside a content column.
-   Screens read --topbar-h, --bottomnav-h and --nav-w (tokens.css)
-   to place sticky bars, toasts and floating toolbars.
+   Phone and tablet: one column with top bar and bottom nav.
+   Desktop: sidebar beside the content. Screens always fill the
+   available width. Screens read --topbar-h, --bottomnav-h and
+   --nav-w (tokens.css) to place sticky bars, toasts and toolbars.
 ---------------------------------------------------------- */
 .app-shell {
   min-height: 100vh;
@@ -88,7 +88,7 @@ select {
 .app-main {
   flex: 1;
   padding-bottom: calc(var(--bottomnav-h) + var(--space-4) + env(safe-area-inset-bottom));
-  /* No top padding on phones: the top bar is sticky and takes its own space. */
+  /* No top padding on phones and tablets: the top bar is sticky and takes its own space. */
 }
 
 .app-main--full {
@@ -96,6 +96,12 @@ select {
 }
 
 @media (min-width: 768px) {
+  .app-main:not(.app-main--full) {
+    padding-inline: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
   .app-shell {
     display: flex;
     align-items: flex-start;
@@ -105,34 +111,8 @@ select {
     flex: 1;
   }
 
-  .app-main {
-    padding: var(--space-4) var(--space-3) var(--space-12);
-  }
-
-  .app-main--full {
-    padding: 0;
-  }
-
-  /* Each screen sits in a centred column. A screen can narrow it
-     by setting --page-max on its root element. */
-  .app-main > * {
-    width: 100%;
-    max-width: var(--page-max, 1080px);
-    margin-inline: auto;
-  }
-
-  .app-main--full > * {
-    max-width: none;
-  }
-}
-
-@media (min-width: 1024px) {
-  .app-main {
-    padding: var(--space-6) var(--space-6) var(--space-16);
-  }
-
-  .app-main--full {
-    padding: 0;
+  .app-main:not(.app-main--full) {
+    padding: var(--space-6) var(--space-6) var(--space-12);
   }
 }
 

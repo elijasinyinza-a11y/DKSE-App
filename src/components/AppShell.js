@@ -16,15 +16,14 @@ const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
 // Login and signup get a navy brand panel beside the form on desktop.
 const AUTH_ROUTES = ['/login', '/signup']
 // Full-screen routes: on phones the top bar and bottom nav are hidden.
-// On tablet and desktop the side navigation stays.
+// On desktop the sidebar stays.
 const FULLSCREEN_ROUTES = ['/sophia/chat']
 
 /*
   Layout by screen width:
-    phone   (< 768px)    top bar + bottom nav
-    tablet  (768–1023px) navy icon rail on the left
-    desktop (≥ 1024px)   labelled navy sidebar on the left
-  The rail and sidebar are the same element, widened by CSS.
+    phone and tablet (< 1024px)  top bar + bottom nav
+    desktop (≥ 1024px)           labelled navy sidebar on the left
+  Screens fill the available width at every size.
 */
 export default function AppShell({ children }) {
   const router = useRouter()
@@ -46,7 +45,7 @@ export default function AppShell({ children }) {
         </div>
       )
     }
-    return <div className={`${styles.bareShell} ${path === '/welcome' ? styles.bareWide : ''}`}>{children}</div>
+    return <div className={styles.bareShell}>{children}</div>
   }
 
   const isFullscreen = FULLSCREEN_ROUTES.includes(path)
@@ -54,7 +53,7 @@ export default function AppShell({ children }) {
 
   return (
     <div className={`app-shell ${isFullscreen ? 'app-shell--full' : ''}`}>
-      {/* Side navigation: tablet rail and desktop sidebar */}
+      {/* Desktop sidebar */}
       <aside className={styles.sideNav} aria-label="Primary">
         <Link href="/home" className={styles.sideBrand}>
           <img src="/images/brand/logo-mark.png" alt="Divine Keys" className={styles.sideLogo} />
@@ -70,7 +69,6 @@ export default function AppShell({ children }) {
                 href={item.href}
                 className={`${styles.sideItem} ${active ? styles.sideActive : ''}`}
                 aria-current={active ? 'page' : undefined}
-                title={item.label}
               >
                 <Icon />
                 <span className={styles.sideLabel}>{item.label}</span>
@@ -81,7 +79,6 @@ export default function AppShell({ children }) {
         <Link
           href="/profile"
           className={`${styles.sideProfile} ${path === '/profile' ? styles.sideActive : ''}`}
-          title="Profile"
         >
           <span className={styles.sideAvatar}>{initials}</span>
           <span className={styles.sideLabel}>Profile</span>

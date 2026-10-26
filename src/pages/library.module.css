@@ -171,3 +171,9 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
+
+@media (min-width: 1440px) {
+  .grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}

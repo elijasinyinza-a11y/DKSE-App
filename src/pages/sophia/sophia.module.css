@@ -202,12 +202,8 @@
   text-align: center;
 }
 
-/* ── TABLET AND DESKTOP ───────────────── */
-.sophia {
-  --page-max: 760px;
-}
-
-@media (min-width: 768px) {
+/* ── DESKTOP ──────────────────────────── */
+@media (min-width: 1024px) {
   .hero {
     border-radius: var(--radius-xl);
     padding: var(--space-8);

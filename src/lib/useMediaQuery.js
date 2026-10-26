@@ -19,3 +19,4 @@ export default function useMediaQuery(query) {
 // Shared breakpoints (keep in step with tokens.css)
 export const TABLET_UP = '(min-width: 768px)'
 export const DESKTOP_UP = '(min-width: 1024px)'
+export const WIDE_UP = '(min-width: 1440px)'

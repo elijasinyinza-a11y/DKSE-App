@@ -73,7 +73,7 @@
 
 .userMsg {
   align-self: flex-end;
-  max-width: 82%;
+  max-width: min(82%, 640px);
   background-color: #0f2550;
   color: #fff;
   border-radius: 16px 16px 4px 16px;
@@ -85,7 +85,7 @@
 
 .reply {
   align-self: flex-start;
-  max-width: 92%;
+  max-width: min(92%, 760px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -305,18 +305,12 @@
 }
 
 /* ── TABLET AND DESKTOP ───────────────── */
-/* The chat fills the screen beside the side navigation; messages and
-   the composer stay in a centred column about 760px wide. */
 @media (min-width: 768px) {
-  .header {
-    padding-inline: max(var(--space-3), calc((100% - 780px) / 2));
-  }
-
   .thread {
-    padding-inline: max(var(--space-4), calc((100% - 760px) / 2));
+    padding: var(--space-6) var(--space-8);
   }
 
   .composer {
-    padding-inline: max(var(--space-4), calc((100% - 760px) / 2));
+    padding-inline: var(--space-8);
   }
 }

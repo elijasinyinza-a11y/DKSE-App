@@ -268,3 +268,9 @@
     font-size: var(--text-2xl);
   }
 }
+
+@media (min-width: 1440px) {
+  .list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

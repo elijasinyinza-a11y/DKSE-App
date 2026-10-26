@@ -154,18 +154,11 @@
   --z-modal:    300;
 }
 
-/* Tablet: icon rail replaces the top bar and bottom nav */
-@media (min-width: 768px) {
+/* Desktop: sidebar replaces the top bar and bottom nav */
+@media (min-width: 1024px) {
   :root {
     --topbar-h:     0px;
     --bottomnav-h:  0px;
-    --nav-w:        80px;
-  }
-}
-
-/* Desktop: labelled sidebar */
-@media (min-width: 1024px) {
-  :root {
     --nav-w:        232px;
   }
 }

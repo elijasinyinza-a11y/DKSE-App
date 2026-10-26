@@ -287,10 +287,6 @@
 }
 
 /* ── TABLET AND DESKTOP ───────────────── */
-.profile {
-  --page-max: 720px;
-}
-
 @media (min-width: 768px) {
   .pageTitle {
     font-size: var(--text-3xl);

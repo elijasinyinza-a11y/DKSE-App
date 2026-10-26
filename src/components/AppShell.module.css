@@ -1,8 +1,8 @@
 /* ============================================================
    APP SHELL
-   phone   (< 768px)    top bar + bottom nav
-   tablet  (768–1023px) navy icon rail
-   desktop (≥ 1024px)   labelled navy sidebar
+   phone and tablet (< 1024px)  top bar + bottom nav
+   desktop (≥ 1024px)           labelled navy sidebar
+   Screens fill the available width at every size.
    ============================================================ */
 
 /* ── BARE SCREENS (welcome, login, signup) ── */
@@ -14,13 +14,9 @@
   background-color: var(--color-page);
 }
 
+/* Tablet and desktop: bare screens fill the screen */
 @media (min-width: 768px) {
-  .bareShell { max-width: 560px; }
-}
-
-/* Welcome becomes a split screen on desktop */
-@media (min-width: 1024px) {
-  .bareWide { max-width: none; }
+  .bareShell { max-width: none; }
 }
 
 /* ── LOGIN / SIGNUP SPLIT ─────────────── */
@@ -186,24 +182,23 @@
   white-space: nowrap;
 }
 
-/* ── SIDE NAV (tablet rail / desktop sidebar) ── */
+/* ── SIDEBAR (desktop only) ───────────── */
 .sideNav { display: none; }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .topBar,
   .bottomNav { display: none; }
 
   .sideNav {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: var(--nav-w);
     flex-shrink: 0;
     position: sticky;
     top: 0;
     height: 100vh;
     height: 100dvh;
-    padding: var(--space-4) var(--space-2);
+    padding: var(--space-5) var(--space-4);
     background-color: #0a1a38;
     border-right: 1px solid #1d3a7a;
     z-index: var(--z-nav);
@@ -213,7 +208,8 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    margin-bottom: var(--space-6);
+    padding-inline: var(--space-2);
+    margin-bottom: var(--space-8);
   }
 
   .sideLogo {
@@ -223,23 +219,27 @@
     object-fit: contain;
   }
 
-  .sideBrandText { display: none; }
+  .sideBrandText {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-amber-border);
+    letter-spacing: 0.02em;
+  }
 
   .sideItems {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
-    width: 100%;
   }
 
   .sideItem,
   .sideProfile {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: var(--space-3);
-    min-height: 48px;
-    width: 100%;
+    min-height: 44px;
+    padding-inline: var(--space-3);
     border-radius: var(--radius-lg);
     color: #B9C3D8;
     transition: background-color var(--transition-fast), color var(--transition-fast);
@@ -263,14 +263,9 @@
     color: #F3D99A;
   }
 
-  /* Labels are hidden on the rail; the title tooltip names each icon */
   .sideLabel {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
   }
 
   .sideProfile { margin-top: auto; }
@@ -289,43 +284,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media (min-width: 1024px) {
-  .sideNav {
-    align-items: stretch;
-    padding: var(--space-5) var(--space-4);
-  }
-
-  .sideBrand {
-    padding-inline: var(--space-2);
-    margin-bottom: var(--space-8);
-  }
-
-  .sideBrandText {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-semibold);
-    color: var(--color-amber-border);
-    letter-spacing: 0.02em;
-  }
-
-  .sideItem,
-  .sideProfile {
-    justify-content: flex-start;
-    padding-inline: var(--space-3);
-    min-height: 44px;
-  }
-
-  .sideLabel {
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip: auto;
-    font-size: var(--text-base);
-    font-weight: var(--weight-medium);
   }
 }

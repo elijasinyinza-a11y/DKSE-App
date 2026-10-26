@@ -228,6 +228,27 @@
   margin-top: var(--space-1);
 }
 
+/* ── TABLET: FULL WIDTH ───────────────── */
+@media (min-width: 768px) {
+  .hero {
+    padding: var(--space-16) var(--space-10) var(--space-10);
+  }
+
+  .heroTitle {
+    font-size: var(--text-3xl);
+    max-width: 560px;
+  }
+
+  .heroSub {
+    font-size: var(--text-base);
+    max-width: 440px;
+  }
+
+  .actions {
+    padding: var(--space-8) max(28px, calc((100% - 440px) / 2)) var(--space-10);
+  }
+}
+
 /* ── DESKTOP: SPLIT SCREEN ────────────── */
 /* Navy brand panel and shelf on the left, actions on the right */
 @media (min-width: 1024px) {

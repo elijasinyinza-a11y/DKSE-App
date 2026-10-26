@@ -419,10 +419,3 @@
   font-weight: var(--weight-medium);
   cursor: pointer;
 }
-
-/* ── TABLET AND DESKTOP ───────────────── */
-/* Keep reading text in a column about 680px wide, even on big screens */
-.bookView,
-.readingView {
-  --page-max: 720px;
-}

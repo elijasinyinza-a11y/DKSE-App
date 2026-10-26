@@ -2,12 +2,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { books, additionalResources } from '../data/content'
 import { getProgress } from '../data/mock'
-import useMediaQuery, { DESKTOP_UP } from '../lib/useMediaQuery'
+import useMediaQuery, { DESKTOP_UP, WIDE_UP } from '../lib/useMediaQuery'
 import styles from './library.module.css'
 
-// Books shown before "Show all": one full row on desktop (6), two rows on phones (4).
+// Books shown before "Show all": two rows on phones (4), one full row on
+// tablets (4), desktops (6) and wide screens (8).
 const COLLAPSED_PHONE = 4
 const COLLAPSED_DESKTOP = 6
+const COLLAPSED_WIDE = 8
 
 function BookTile({ book, showProgress, seriesLabel }) {
   const prog = getProgress(book.slug)
@@ -37,7 +39,9 @@ function BookTile({ book, showProgress, seriesLabel }) {
 export default function Library() {
   const [showAllSeries, setShowAllSeries] = useState(false)
   const [showAllMore, setShowAllMore] = useState(false)
-  const COLLAPSED = useMediaQuery(DESKTOP_UP) ? COLLAPSED_DESKTOP : COLLAPSED_PHONE
+  const isDesktop = useMediaQuery(DESKTOP_UP)
+  const isWide = useMediaQuery(WIDE_UP)
+  const COLLAPSED = isWide ? COLLAPSED_WIDE : isDesktop ? COLLAPSED_DESKTOP : COLLAPSED_PHONE
 
   const visibleSeries = showAllSeries ? books : books.slice(0, COLLAPSED)
   const visibleMore = showAllMore ? additionalResources : additionalResources.slice(0, COLLAPSED)
