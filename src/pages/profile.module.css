@@ -266,8 +266,8 @@
 /* ── TOAST ────────────────────────────── */
 .toast {
   position: fixed;
-  bottom: calc(68px + var(--space-4));
-  left: 50%;
+  bottom: calc(var(--bottomnav-h) + var(--space-8) + env(safe-area-inset-bottom));
+  left: calc(50% + var(--nav-w) / 2);
   transform: translateX(-50%);
   background-color: var(--color-ink);
   color: #ffffff;
@@ -284,4 +284,15 @@
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateX(-50%) translateY(8px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── TABLET AND DESKTOP ───────────────── */
+.profile {
+  --page-max: 720px;
+}
+
+@media (min-width: 768px) {
+  .pageTitle {
+    font-size: var(--text-3xl);
+  }
 }

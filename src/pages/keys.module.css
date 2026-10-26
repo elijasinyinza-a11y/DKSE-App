@@ -380,3 +380,25 @@
   max-width: 300px;
   margin: 0 auto var(--space-5);
 }
+
+/* ── TABLET AND DESKTOP ───────────────── */
+.keys {
+  --page-max: 960px;
+}
+
+@media (min-width: 768px) {
+  .pageTitle {
+    font-size: var(--text-3xl);
+  }
+
+  .statsSection {
+    gap: var(--space-4);
+  }
+
+  /* Book rows sit two across */
+  .list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}

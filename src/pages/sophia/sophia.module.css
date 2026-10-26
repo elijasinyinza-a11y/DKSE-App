@@ -201,3 +201,15 @@
   color: var(--color-sub);
   text-align: center;
 }
+
+/* ── TABLET AND DESKTOP ───────────────── */
+.sophia {
+  --page-max: 760px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+  }
+}

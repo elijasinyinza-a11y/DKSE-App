@@ -2,9 +2,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { books, additionalResources } from '../data/content'
 import { getProgress } from '../data/mock'
+import useMediaQuery, { DESKTOP_UP } from '../lib/useMediaQuery'
 import styles from './library.module.css'
 
-const COLLAPSED = 4
+// Books shown before "Show all": one full row on desktop (6), two rows on phones (4).
+const COLLAPSED_PHONE = 4
+const COLLAPSED_DESKTOP = 6
 
 function BookTile({ book, showProgress, seriesLabel }) {
   const prog = getProgress(book.slug)
@@ -34,6 +37,7 @@ function BookTile({ book, showProgress, seriesLabel }) {
 export default function Library() {
   const [showAllSeries, setShowAllSeries] = useState(false)
   const [showAllMore, setShowAllMore] = useState(false)
+  const COLLAPSED = useMediaQuery(DESKTOP_UP) ? COLLAPSED_DESKTOP : COLLAPSED_PHONE
 
   const visibleSeries = showAllSeries ? books : books.slice(0, COLLAPSED)
   const visibleMore = showAllMore ? additionalResources : additionalResources.slice(0, COLLAPSED)

@@ -53,6 +53,9 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Desktop: wisdom on the left, reading on the right */}
+      <div className={styles.columns}>
+      <div className={styles.mainCol}>
       <section className={styles.screenSection}>
         <p className="section-label">Daily wisdom</p>
         <div className={styles.dailyCard} aria-busy={!wisdom}>
@@ -88,11 +91,14 @@ export default function Home() {
         </section>
       )}
 
+      </div>
+
+      <div className={styles.sideCol}>
       {continueReading.length > 0 && (
         <section className={styles.screenSection}>
           <div className={styles.sectionHead}>
             <p className="section-label" style={{ marginBottom: 0 }}>Continue reading</p>
-            <Link href="/keys" className={styles.seeAll}>My keys</Link>
+            <Link href="/keys" className={styles.seeAll}>My Journey</Link>
           </div>
           <div className={styles.continueList}>
             {continueReading.map((book) => (
@@ -123,6 +129,8 @@ export default function Home() {
           <ArrowIcon />
         </Link>
       </section>
+      </div>
+      </div>
 
     </div>
   )

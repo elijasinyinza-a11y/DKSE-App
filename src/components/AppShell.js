@@ -13,54 +13,110 @@ const NAV_ITEMS = [
 ]
 
 const BARE_ROUTES = ['/', '/login', '/signup', '/welcome']
-// Full-screen app routes: keep the app frame but hide the top bar and bottom nav.
+// Login and signup get a navy brand panel beside the form on desktop.
+const AUTH_ROUTES = ['/login', '/signup']
+// Full-screen routes: on phones the top bar and bottom nav are hidden.
+// On tablet and desktop the side navigation stays.
 const FULLSCREEN_ROUTES = ['/sophia/chat']
 
+/*
+  Layout by screen width:
+    phone   (< 768px)    top bar + bottom nav
+    tablet  (768–1023px) navy icon rail on the left
+    desktop (≥ 1024px)   labelled navy sidebar on the left
+  The rail and sidebar are the same element, widened by CSS.
+*/
 export default function AppShell({ children }) {
   const router = useRouter()
-  const isBare = BARE_ROUTES.includes(router.pathname)
+  const path = router.pathname
   const initials = mockUser.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
 
-  if (isBare) {
-    return <div className={styles.bareShell}>{children}</div>
+  if (BARE_ROUTES.includes(path)) {
+    if (AUTH_ROUTES.includes(path)) {
+      return (
+        <div className={styles.authSplit}>
+          <aside className={styles.authAside} aria-hidden="true">
+            <img src="/images/brand/logo-mark.png" alt="" className={styles.authLogo} />
+            <p className={styles.authName}>Divine Keys</p>
+            <p className={styles.authSub}>for Spiritual Exploits</p>
+            <p className={styles.authLine}>Wisdom to navigate life towards your God-ordained purpose</p>
+            <p className={styles.authTrust}>A Divine Keys Christian Network ministry</p>
+          </aside>
+          <div className={styles.authPane}>{children}</div>
+        </div>
+      )
+    }
+    return <div className={`${styles.bareShell} ${path === '/welcome' ? styles.bareWide : ''}`}>{children}</div>
   }
 
-  if (FULLSCREEN_ROUTES.includes(router.pathname)) {
-    return <div className="app-shell">{children}</div>
-  }
+  const isFullscreen = FULLSCREEN_ROUTES.includes(path)
+  const isActive = (href) => (href === '/home' ? path === '/home' : path.startsWith(href))
 
   return (
-    <div className="app-shell">
-      {/* Top bar with avatar/profile link */}
-      <header className={styles.topBar}>
-        <Link href="/home" className={styles.brandMark}>
-          <img
-            src="/images/brand/logo-mark.png"
-            alt="Divine Keys"
-            className={styles.logoImg}
-          />
+    <div className={`app-shell ${isFullscreen ? 'app-shell--full' : ''}`}>
+      {/* Side navigation: tablet rail and desktop sidebar */}
+      <aside className={styles.sideNav} aria-label="Primary">
+        <Link href="/home" className={styles.sideBrand}>
+          <img src="/images/brand/logo-mark.png" alt="Divine Keys" className={styles.sideLogo} />
+          <span className={styles.sideBrandText}>Divine Keys</span>
         </Link>
-        <Link href="/profile" className={styles.avatar} aria-label="Profile">
-          {initials}
+        <nav className={styles.sideItems}>
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon
+            const active = isActive(item.href)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${styles.sideItem} ${active ? styles.sideActive : ''}`}
+                aria-current={active ? 'page' : undefined}
+                title={item.label}
+              >
+                <Icon />
+                <span className={styles.sideLabel}>{item.label}</span>
+              </Link>
+            )
+          })}
+        </nav>
+        <Link
+          href="/profile"
+          className={`${styles.sideProfile} ${path === '/profile' ? styles.sideActive : ''}`}
+          title="Profile"
+        >
+          <span className={styles.sideAvatar}>{initials}</span>
+          <span className={styles.sideLabel}>Profile</span>
         </Link>
-      </header>
+      </aside>
 
-      <main className="app-main">{children}</main>
-
-      <nav className={styles.bottomNav} aria-label="Primary">
-        {NAV_ITEMS.map((item) => {
-          const active = item.href === '/home'
-            ? router.pathname === '/home'
-            : router.pathname.startsWith(item.href)
-          const Icon = item.icon
-          return (
-            <Link key={item.href} href={item.href} className={`${styles.navItem} ${active ? styles.navActive : ''}`}>
-              <Icon />
-              <span className={styles.navLabel}>{item.label}</span>
+      <div className="app-column">
+        {!isFullscreen && (
+          <header className={styles.topBar}>
+            <Link href="/home" className={styles.brandMark}>
+              <img src="/images/brand/logo-mark.png" alt="Divine Keys" className={styles.logoImg} />
             </Link>
-          )
-        })}
-      </nav>
+            <Link href="/profile" className={styles.avatar} aria-label="Profile">
+              {initials}
+            </Link>
+          </header>
+        )}
+
+        <main className={isFullscreen ? 'app-main app-main--full' : 'app-main'}>{children}</main>
+
+        {!isFullscreen && (
+          <nav className={styles.bottomNav} aria-label="Primary">
+            {NAV_ITEMS.map((item) => {
+              const Icon = item.icon
+              const active = isActive(item.href)
+              return (
+                <Link key={item.href} href={item.href} className={`${styles.navItem} ${active ? styles.navActive : ''}`}>
+                  <Icon />
+                  <span className={styles.navLabel}>{item.label}</span>
+                </Link>
+              )
+            })}
+          </nav>
+        )}
+      </div>
     </div>
   )
 }

@@ -6,7 +6,7 @@
   justify-content: space-between;
   padding: var(--space-4) var(--space-5);
   position: sticky;
-  top: 56px;                     /* sit just below the app's top bar */
+  top: var(--topbar-h);          /* just below the phone top bar; 0 on tablet and desktop */
   background-color: var(--color-page);
   z-index: var(--z-raised);
 }
@@ -381,8 +381,8 @@
 /* ── SOPHIA: SELECTION BAR ────────────── */
 .selectionBar {
   position: fixed;
-  left: 50%;
-  bottom: calc(64px + var(--space-4) + env(safe-area-inset-bottom));
+  left: calc(50% + var(--nav-w) / 2);
+  bottom: calc(var(--bottomnav-h) + var(--space-4) + env(safe-area-inset-bottom));
   transform: translateX(-50%);
   display: flex;
   gap: 2px;
@@ -418,4 +418,11 @@
   font-size: 13px;
   font-weight: var(--weight-medium);
   cursor: pointer;
+}
+
+/* ── TABLET AND DESKTOP ───────────────── */
+/* Keep reading text in a column about 680px wide, even on big screens */
+.bookView,
+.readingView {
+  --page-max: 720px;
 }

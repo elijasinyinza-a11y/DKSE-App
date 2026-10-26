@@ -149,3 +149,25 @@
 .showMore:hover {
   border-color: var(--color-amber-border);
 }
+
+/* ── TABLET AND DESKTOP ───────────────── */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .pageTitle {
+    font-size: var(--text-3xl);
+  }
+
+  .bookTile:hover .cover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

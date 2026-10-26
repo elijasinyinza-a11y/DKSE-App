@@ -180,3 +180,18 @@
   color: var(--color-amber);
   font-weight: var(--weight-medium);
 }
+
+/* ── TABLET AND DESKTOP ───────────────── */
+@media (min-width: 768px) {
+  .authTitle {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* Desktop: the form sits in the middle of its half, beside the brand panel */
+@media (min-width: 1024px) {
+  .authBody {
+    flex: 0 0 auto;
+    margin-block: auto;
+  }
+}

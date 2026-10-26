@@ -227,3 +227,74 @@
   line-height: var(--leading-relaxed);
   margin-top: var(--space-1);
 }
+
+/* ── DESKTOP: SPLIT SCREEN ────────────── */
+/* Navy brand panel and shelf on the left, actions on the right */
+@media (min-width: 1024px) {
+  .welcome {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+  }
+
+  .hero {
+    grid-column: 1;
+    grid-row: 1;
+    justify-content: center;
+    padding: var(--space-16) var(--space-12);
+  }
+
+  .heroGlow {
+    width: 480px;
+    height: 480px;
+  }
+
+  .logoImg {
+    height: 120px;
+  }
+
+  .logoName {
+    font-size: var(--text-2xl);
+  }
+
+  .heroTitle {
+    font-size: var(--text-4xl);
+    max-width: 560px;
+  }
+
+  .heroSub {
+    font-size: var(--text-md);
+    max-width: 440px;
+  }
+
+  .shelf {
+    grid-column: 1;
+    grid-row: 2;
+    padding: var(--space-5) var(--space-6) var(--space-4);
+  }
+
+  .shelfRow {
+    height: 100px;
+    gap: 10px;
+  }
+
+  .spine {
+    width: 52px;
+    height: 100px;
+  }
+
+  .shelfLabel {
+    font-size: var(--text-xs);
+  }
+
+  .actions {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-content: center;
+    padding: var(--space-12) max(var(--space-12), calc((100% - 400px) / 2));
+  }
+
+  .actionsSub {
+    font-size: var(--text-sm);
+  }
+}

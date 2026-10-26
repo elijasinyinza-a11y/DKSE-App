@@ -284,7 +284,7 @@
 .toast {
   position: fixed;
   top: 72px;
-  left: 50%;
+  left: calc(50% + var(--nav-w) / 2);
   transform: translateX(-50%);
   background-color: var(--color-ink);
   color: #fff;
@@ -302,4 +302,21 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* ── TABLET AND DESKTOP ───────────────── */
+/* The chat fills the screen beside the side navigation; messages and
+   the composer stay in a centred column about 760px wide. */
+@media (min-width: 768px) {
+  .header {
+    padding-inline: max(var(--space-3), calc((100% - 780px) / 2));
+  }
+
+  .thread {
+    padding-inline: max(var(--space-4), calc((100% - 760px) / 2));
+  }
+
+  .composer {
+    padding-inline: max(var(--space-4), calc((100% - 760px) / 2));
+  }
 }

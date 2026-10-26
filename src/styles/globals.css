@@ -65,24 +65,75 @@ select {
 
 /* ----------------------------------------------------------
    APP SHELL LAYOUT
-   A fixed frame: content scrolls, nav stays put.
+   Phone: one column with top bar and bottom nav.
+   Tablet and desktop: side navigation beside a content column.
+   Screens read --topbar-h, --bottomnav-h and --nav-w (tokens.css)
+   to place sticky bars, toasts and floating toolbars.
 ---------------------------------------------------------- */
 .app-shell {
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;              /* phone-width app frame, centred on desktop */
-  margin-inline: auto;
   background-color: var(--color-page);
   position: relative;
-  border-inline: 1px solid var(--color-border);
+}
+
+.app-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .app-main {
   flex: 1;
-  padding-bottom: 80px;          /* clear the bottom nav */
-  /* No top padding: the top bar is sticky, so it already takes its own space. */
+  padding-bottom: calc(var(--bottomnav-h) + var(--space-4) + env(safe-area-inset-bottom));
+  /* No top padding on phones: the top bar is sticky and takes its own space. */
+}
+
+.app-main--full {
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .app-shell {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .app-column {
+    flex: 1;
+  }
+
+  .app-main {
+    padding: var(--space-4) var(--space-3) var(--space-12);
+  }
+
+  .app-main--full {
+    padding: 0;
+  }
+
+  /* Each screen sits in a centred column. A screen can narrow it
+     by setting --page-max on its root element. */
+  .app-main > * {
+    width: 100%;
+    max-width: var(--page-max, 1080px);
+    margin-inline: auto;
+  }
+
+  .app-main--full > * {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main {
+    padding: var(--space-6) var(--space-6) var(--space-16);
+  }
+
+  .app-main--full {
+    padding: 0;
+  }
 }
 
 /* ----------------------------------------------------------

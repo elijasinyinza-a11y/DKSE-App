@@ -1,3 +1,11 @@
+/* ============================================================
+   APP SHELL
+   phone   (< 768px)    top bar + bottom nav
+   tablet  (768–1023px) navy icon rail
+   desktop (≥ 1024px)   labelled navy sidebar
+   ============================================================ */
+
+/* ── BARE SCREENS (welcome, login, signup) ── */
 .bareShell {
   min-height: 100vh;
   min-height: 100dvh;
@@ -6,7 +14,100 @@
   background-color: var(--color-page);
 }
 
-/* ── TOP BAR ──────────────────────────── */
+@media (min-width: 768px) {
+  .bareShell { max-width: 560px; }
+}
+
+/* Welcome becomes a split screen on desktop */
+@media (min-width: 1024px) {
+  .bareWide { max-width: none; }
+}
+
+/* ── LOGIN / SIGNUP SPLIT ─────────────── */
+.authSplit {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-page);
+}
+
+.authAside { display: none; }
+
+.authPane {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .authPane { max-width: 520px; }
+}
+
+@media (min-width: 1024px) {
+  .authSplit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .authAside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: var(--space-16) var(--space-12);
+    background: linear-gradient(170deg, #050d1f 0%, #0a1a38 55%, #0f2550 100%);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .authPane {
+    width: 100%;
+    max-width: 460px;
+    align-self: center;
+  }
+}
+
+.authLogo {
+  height: 112px;
+  width: auto;
+  margin-bottom: var(--space-3);
+  filter: drop-shadow(0 6px 20px rgba(146, 96, 10, 0.6));
+}
+
+.authName {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  color: var(--color-amber-border);
+  letter-spacing: 0.04em;
+}
+
+.authSub {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.authLine {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  color: #ffffff;
+  max-width: 420px;
+  margin-top: var(--space-8);
+}
+
+.authTrust {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: var(--space-6);
+}
+
+/* ── TOP BAR (phone) ──────────────────── */
 .topBar {
   position: sticky;
   top: 0;
@@ -48,30 +149,13 @@
   font-family: var(--font-serif);
 }
 
-.avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-amber-bg);
-  border: var(--border-thin) solid var(--color-amber-border);
-  color: var(--color-amber);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-}
-
-/* ── BOTTOM NAV ───────────────────────── */
+/* ── BOTTOM NAV (phone) ───────────────── */
 .bottomNav {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
-  height: 64px;
+  left: 0;
+  right: 0;
+  height: calc(64px + env(safe-area-inset-bottom));
   background-color: var(--color-card);
   border-top: var(--border-thin) solid var(--color-border);
   display: flex;
@@ -100,4 +184,148 @@
   font-weight: var(--weight-medium);
   letter-spacing: 0.01em;
   white-space: nowrap;
+}
+
+/* ── SIDE NAV (tablet rail / desktop sidebar) ── */
+.sideNav { display: none; }
+
+@media (min-width: 768px) {
+  .topBar,
+  .bottomNav { display: none; }
+
+  .sideNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--nav-w);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    padding: var(--space-4) var(--space-2);
+    background-color: #0a1a38;
+    border-right: 1px solid #1d3a7a;
+    z-index: var(--z-nav);
+  }
+
+  .sideBrand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .sideLogo {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .sideBrandText { display: none; }
+
+  .sideItems {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    width: 100%;
+  }
+
+  .sideItem,
+  .sideProfile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    color: #B9C3D8;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .sideItem:hover,
+  .sideProfile:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  .sideItem:focus-visible,
+  .sideProfile:focus-visible {
+    outline: 2px solid var(--color-amber-border);
+    outline-offset: 2px;
+  }
+
+  .sideActive,
+  .sideActive:hover {
+    background-color: rgba(232, 200, 122, 0.12);
+    color: #F3D99A;
+  }
+
+  /* Labels are hidden on the rail; the title tooltip names each icon */
+  .sideLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .sideProfile { margin-top: auto; }
+
+  .sideAvatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    background-color: rgba(232, 200, 122, 0.15);
+    border: 1.5px solid rgba(232, 200, 122, 0.5);
+    color: #E8C87A;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-serif);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sideNav {
+    align-items: stretch;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .sideBrand {
+    padding-inline: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .sideBrandText {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-amber-border);
+    letter-spacing: 0.02em;
+  }
+
+  .sideItem,
+  .sideProfile {
+    justify-content: flex-start;
+    padding-inline: var(--space-3);
+    min-height: 44px;
+  }
+
+  .sideLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+  }
 }
